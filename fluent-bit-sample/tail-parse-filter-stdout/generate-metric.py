@@ -15,6 +15,9 @@ logger.info(
     json.dumps({"metric": "cat-image", "value": 100, "workspace": "first_workspace"})
 )
 logger.info(
+    json.dumps({"metric": "cat-image", "value": -10, "workspace": "first_workspace"})
+)
+logger.info(
     json.dumps(
         {
             "bad_metric": "cat-image",

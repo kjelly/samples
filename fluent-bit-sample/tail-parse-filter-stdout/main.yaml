@@ -1,0 +1,34 @@
+service:
+    flush:           1
+    daemon:          off
+    log_level:       info
+
+pipeline:
+    inputs:
+        - name: tail
+          path: a.log
+          parser: bill
+    filters:
+      - name: parser
+        match: '*'
+        key_name: message
+        parser: json
+      - name: grep
+        match: '*'
+        regex: "metric .+"
+      - name: grep
+        match: '*'
+        regex: "workspace .+"
+      - name: lua
+        match: '*'
+        call: check_value
+        code: |
+          function check_value(tag, timestamp, record)
+            if record.value < 0 then
+              return -1, timestamp, record
+            end
+            return 0, timestamp, record 
+          end
+    outputs:
+        - name:  stdout
+          match: "*"
