@@ -1,6 +1,6 @@
 # fluent-bit sample
 
-示範 fluent-bit parser 與 filter 功能。已知限制，如果型別是 int ，無法使用任何filter。filter只有支援 string 。
+示範 fluent-bit parser 與 filter 功能。已知限制，如果型別是 int ，無法使用任何filter(lua, wasm 這種例外)。filter只有支援 string 。
 
 
 ```
